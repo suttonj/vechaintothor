@@ -8,9 +8,8 @@ var pkg = require('./package.json');
 
 // Set the banner content
 var banner = ['/*!\n',
-  ' * Start Bootstrap - <%= pkg.title %> v<%= pkg.version %> (<%= pkg.homepage %>)\n',
-  ' * Copyright 2013-' + (new Date()).getFullYear(), ' <%= pkg.author %>\n',
-  ' * Licensed under <%= pkg.license %> (https://github.com/BlackrockDigital/<%= pkg.name %>/blob/master/LICENSE)\n',
+  ' * Vechain To Thor - Calculate your Thor Power generation\n',
+  ' * Copyright 2017-' + (new Date()).getFullYear(), ' SharkCIA\n',
   ' */\n',
   ''
 ].join('');
