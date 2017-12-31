@@ -1,7 +1,6 @@
 /*!
- * Start Bootstrap - One Page Wonder v4.0.0-beta.2 (https://startbootstrap.com/template-overviews/one-page-wonder)
- * Copyright 2013-2017 Start Bootstrap
- * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-one-page-wonder/blob/master/LICENSE)
+ * Vechain To Thor - Calculate your Thor Power generation
+ * Copyright 2017-2017 SharkCIA
  */
 body {
   font-family: 'Lato';
@@ -58,7 +57,7 @@ header.masthead {
   overflow: hidden;
   padding-top: calc(7rem + 72px);
   padding-bottom: 7rem;
-  background: linear-gradient(0deg, #ff6a00 0%, #ee0979 100%);
+  background: linear-gradient(0deg, #32b4f2 0%, #9f80ce 100%);
   background-repeat: no-repeat;
   background-position: center center;
   background-attachment: scroll;
@@ -68,6 +67,7 @@ header.masthead {
 header.masthead .masthead-content {
   z-index: 1;
   position: relative;
+  text-align: center;
 }
 
 header.masthead .masthead-content .masthead-heading {
@@ -82,7 +82,7 @@ header.masthead .bg-circle {
   z-index: 0;
   position: absolute;
   border-radius: 100%;
-  background: linear-gradient(0deg, #ee0979 0%, #ff6a00 100%);
+  background: linear-gradient(0deg, #9f80ce 0%, #32b4f2 100%);
 }
 
 header.masthead .bg-circle-1 {
@@ -113,6 +113,10 @@ header.masthead .bg-circle-4 {
   right: 35%;
 }
 
+header.masthead .thor-reward {
+  margin-top: 25px;
+}
+
 @media (min-width: 992px) {
   header.masthead {
     padding-top: calc(10rem + 55px);
@@ -127,33 +131,33 @@ header.masthead .bg-circle-4 {
 }
 
 .bg-primary {
-  background-color: #ee0979 !important;
+  background-color: #9f80ce !important;
 }
 
 .btn-primary {
-  background-color: #ee0979;
-  border-color: #ee0979;
+  background-color: #9f80ce;
+  border-color: #9f80ce;
 }
 
 .btn-primary:active, .btn-primary:focus, .btn-primary:hover {
-  background-color: #bd0760 !important;
-  border-color: #bd0760 !important;
+  background-color: #835bc0 !important;
+  border-color: #835bc0 !important;
 }
 
 .btn-primary:focus {
-  box-shadow: 0 0 0 0.2rem rgba(238, 9, 121, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(159, 128, 206, 0.5);
 }
 
 .btn-secondary {
-  background-color: #ff6a00;
-  border-color: #ff6a00;
+  background-color: #32b4f2;
+  border-color: #32b4f2;
 }
 
 .btn-secondary:active, .btn-secondary:focus, .btn-secondary:hover {
-  background-color: #cc5500 !important;
-  border-color: #cc5500 !important;
+  background-color: #0e9ee3 !important;
+  border-color: #0e9ee3 !important;
 }
 
 .btn-secondary:focus {
-  box-shadow: 0 0 0 0.2rem rgba(255, 106, 0, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(50, 180, 242, 0.5);
 }
