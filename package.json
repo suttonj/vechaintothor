@@ -1,29 +1,26 @@
 {
-  "title": "One Page Wonder",
-  "name": "startbootstrap-one-page-wonder",
-  "version": "4.0.0-beta.2",
-  "description": "A one page HTML template built with Bootstrap",
+  "title": "Vechain To Thor",
+  "name": "vechain-to-thor",
+  "version": "1.0.0-beta.1",
+  "description": "Thor Power Calculator",
   "keywords": [
-    "css",
-    "sass",
-    "html",
-    "responsive",
-    "theme",
-    "template"
+    "vechain",
+    "thor",
+    "thor power",
+    "vet",
+    "ven"
   ],
-  "homepage": "https://startbootstrap.com/template-overviews/one-page-wonder",
+  "homepage": "https://vechaintothor.com/",
   "bugs": {
-    "url": "https://github.com/BlackrockDigital/startbootstrap-one-page-wonder/issues",
-    "email": "feedback@startbootstrap.com"
+    "url": "https://github.com/suttonj/vechain-to-thor/issues"
   },
-  "license": "MIT",
-  "author": "Start Bootstrap",
+  "author": "SharkCIA",
   "contributors": [
-    "David Miller (http://davidmiller.io/)"
+    "frostyfoliage"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/BlackrockDigital/startbootstrap-one-page-wonder.git"
+    "url": "https://github.com/suttonj/vechain-to-thor.git"
   },
   "dependencies": {
     "bootstrap": "^4.0.0-beta.2",
