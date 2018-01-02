@@ -48,7 +48,17 @@
           <div class="row justify-content-md-center">
             <div class="col-sm-4">
               <h3>How many VET do you own?</h3>
-              <input type="number" step="any" min="0" class="form-control" id="vetamount" name="vetamount">
+              <input type="number" step="any" min="0" class="form-control" id="vetamount" name="vetamount" placeholder="100">
+            </div>
+            <div id="exchangePrices">
+                <div class="row justify-content-center result-text">
+                    <div class="col-sm-4"> VET/USDT Price ($) </div>
+                    <div id="vetUsdtPrice" class="col-4"></div>
+                    <div class="col-sm-4"> VET/BTC Price ($) </div>
+                    <div id="vetBtcPrice" class="col-4"></div>
+                    <div class="col-sm-4"> BTC/USDT Price ($) </div>
+                    <div id="btcUsdtPrice" class="col-4"></div>
+                </div>              
             </div>
           </div>
           <form id="priceAndNodeForm"> 

@@ -1,8 +1,14 @@
-(function($) {
+(function($) {	
+	
 	var calculateButton = $("#thorcalculate");
 	var B = 0.00042;
 	var NB = 0.00015; //TODO: this value will change next year at the latest
 	var thorPrice = 2;
+		
+	var topVetBid = 0.00015; // update via API
+	var btcUsdt = 10000; // update via API
+
+	var vetUsdt = topVetBid / btcUsdt;
 
 	var calculateThor = function(vet, nodeType) {
 		var A = (nodeType == "thrudheim");
@@ -15,10 +21,31 @@
 	};
 
 	$(calculateButton).on("click", function() {
-		var vetAmount = $("#vetamount").val();
-		var nodeType = $("#nodeSelector").val();
-		thorPrice = $("#thorPrice").val() || thorPrice;
+		this.calculatePayouts();
+		
+		// TODO - these ticker queries should just be on a timer methinks
+		var vetTicker = new ticker("https://api.binance.com");
+		vetTicker.get("/api/v1/depth/?symbol=VETBTC", function(response) {
+			var info = JSON.parse(response.body);			
+			if (info.bids.length > 0 && info.bids[0].length > 0) {
+				topVetBid = info.bids[0][0]; // see binance api
+				vetUsdt = topVetBid / btcUsdt;
+			}
+			vetUsdt = topVetBid / btcUsdt;
+		});
 
+		var btcTicker = new ticker("https://api.binance.com");
+		btcTicker.get("/api/v1/depth/?symbol=BTCUSDT", function(response) {
+			var info = JSON.parse(response.body);			
+			if (info.bids.length > 0 && info.bids[0].length > 0) {
+				btcUsdt = info.bids[0][0]; // see binance api
+				vetUsdt = topVetBid / btcUsdt;
+			}
+		});
+
+	});
+
+	var calculatePayouts = function() {		
 		if($.isNumeric(vetAmount)) {
 			var thorPerDay = calculateThor(vetAmount, nodeType);
 			var tpdDollars = (thorPerDay*thorPrice).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
@@ -40,7 +67,7 @@
 
 			$("#thorReward").show();
 		}
-	});
+	}
 
 	$("#vetamount").keyup(function(event) {
     	if (event.keyCode === 13) {
@@ -62,4 +89,18 @@
 		}
 	});
 
+	// dummy file for ticker that can evolve into full api endpoint support in the future
+	var ticker = function(url) {
+    	this.get = function(url, callback) {
+			var httpReq = new XMLHttpRequest();
+			httpReq.onreadystatechange = function() {
+				if (httpReq.readyState == 4 && httpReq.status == 200) {
+					callback(httpReq.responseText);
+				}
+			}
+			httpReq.open("GET", url, true);
+			httpReq.send( null );
+   	 	}
+	}
 }($));
+
