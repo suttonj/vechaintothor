@@ -1,8 +1,19 @@
 (function($) {
 	var calculateButton = $("#thorcalculate");
+	var vetAmountInput = $("#vetamount");
+	var thorPriceInput = $("#thorPrice");
+	var nodeTypeSelector = $("#nodeSelector");
+
+	var thorPerDayDisplay = $("#thorPerDay");
+	var incomePerDayDisplay = $("#incomePerDay");
+	var thorPerYearDisplay = $("#thorPerYear");
+	var incomePerYearDisplay = $("#incomePerYear");
+	var thorRewardDisplay = $("#thorReward");
+
 	var B = 0.00042;
 	var NB = 0.00015; //TODO: this value will change next year at the latest
 	var thorPrice = 2;
+	var vetAmount = 0;
 
 	var calculateThor = function(vet, nodeType) {
 		var A = (nodeType == "thrudheim");
@@ -14,37 +25,54 @@
 		return (B + (NB * bonus)) * vet;
 	};
 
-	$(calculateButton).on("click", function() {
-		var vetAmount = $("#vetamount").val();
-		var nodeType = $("#nodeSelector").val();
-		thorPrice = $("#thorPrice").val() || thorPrice;
+	var inputChange = function(vet, thor) {
+		var vetAmount = vet || vetAmountInput.val();
+		var nodeType = nodeTypeSelector.val();
+		var thorPrice = thor || thorPriceInput.val();
 
 		if($.isNumeric(vetAmount)) {
 			var thorPerDay = calculateThor(vetAmount, nodeType);
 			var tpdDollars = (thorPerDay*thorPrice).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
-			$("#thorPerDay").html(
+			thorPerDayDisplay.html(
 				thorPerDay.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '1,') + " THOR"
 			);
-			$("#incomePerDay").html("$" + tpdDollars);
+			incomePerDayDisplay.html("$" + tpdDollars);
 			
 			var thorPerYear = thorPerDay*365;
 			var tpyDollars = (thorPerYear*thorPrice).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
-			$("#thorPerYear").html(
+			thorPerYearDisplay.html(
 				thorPerYear.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '1,') + " THOR"
 			);
-			$("#incomePerYear").html("$" + tpyDollars);
+			incomePerYearDisplay.html("$" + tpyDollars);
 
 			if (nodeType === "thrudheim") {
-				$("#thorRewardPerYear").append("<p> PLUS 30% of all THOR Power consumed on the blockchain");
+				$(".dollar-reward").append("<p> PLUS 30% of all THOR Power consumed on the blockchain");
 			}
 
-			$("#thorReward").show();
+			if (!thorRewardDisplay.is(':visible')) {
+				thorRewardDisplay.show();
+			}
 		}
-	});
+	};
+
+	$(calculateButton).on("click", calculateThor);
 
 	$("#vetamount").keyup(function(event) {
-    	if (event.keyCode === 13) {
-        	$(calculateButton).click();
+    	// if (event.keyCode === 13) {
+     //    	$(calculateButton).click();
+    	// }
+    	var currentVetAmount = vetAmountInput.val();
+    	if (currentVetAmount != vetAmount) {
+    		vetAmount = currentVetAmount;
+    		inputChange(vetAmount, thorPrice);
+    	}
+	});
+
+	$("#thorPrice").on('change keyup', function(event) {
+		var currentThorPrice = thorPriceInput.val();
+    	if (currentThorPrice != thorPrice) {
+    		thorPrice = currentThorPrice;
+    		inputChange(vetAmount, thorPrice);
     	}
 	});
 
