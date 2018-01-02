@@ -10,15 +10,13 @@
 	var thorPerYearDisplay = $("#thorPerYear");
 	var incomePerYearDisplay = $("#incomePerYear");
 	var thorRewardDisplay = $("#thorReward");
+	var topVetBid = $("#vetBtcPrice");
+	var btcUsdt = $("#btcUsdtPrice");
+	var vetUsdt = $("#vetUsdtPrice");	
 
 	var B = 0.00042;
 	var NB = 0.00015; //TODO: this value will change next year at the latest
-	var thorPrice = 2;
-		
-	var topVetBid = 0.00015; // update via API
-	var btcUsdt = 10000; // update via API
-
-	var vetUsdt = topVetBid / btcUsdt;
+	var thorPrice = 2;			
 	var vetAmount = 0;
 
 	var calculateThor = function(vet, nodeType) {
@@ -31,7 +29,7 @@
 		return (B + (NB * bonus)) * vet;
 	};
 
-	$(document).ready = function() {
+	$(document).ready = function() {		
 		var binanceTicker = new ticker("https://api.binance.com");
 		binanceTicker.get("/api/v1/depth/?symbol=VETBTC", function(response) {
 			var info = JSON.parse(response.body);			
@@ -54,7 +52,7 @@
 		var vetAmount = vet || vetAmountInput.val();
 		var nodeType = nodeTypeSelector.val();
 		var thorPrice = thor || thorPriceInput.val();
-		
+
 		if($.isNumeric(vetAmount)) {
 			var thorPerDay = calculateThor(vetAmount, nodeType);
 			var tpdDollars = (thorPerDay*thorPrice).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
