@@ -1,6 +1,6 @@
 /*!
  * Vechain To Thor - Calculate your Thor Power generation
- * Copyright 2017-2017 SharkCIA
+ * Copyright 2017-2018 SharkCIA
  */
 body {
   font-family: 'Lato';
@@ -160,4 +160,24 @@ header.masthead .thor-reward {
 
 .btn-secondary:focus {
   box-shadow: 0 0 0 0.2rem rgba(50, 180, 242, 0.5);
+}
+
+.thor-reward {
+  width: 500px;
+  margin: 0 auto;
+  margin-top: 25px;
+}
+
+.thor-reward .result-label {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.thor-reward .result-text {
+  font-weight: 900;
+  font-size: 24px;
+}
+
+#priceAndNodeForm {
+  margin-top: 25px;
 }
