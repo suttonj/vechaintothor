@@ -2,47 +2,39 @@
 	var calculateButton = $("#thorcalculate");
 	var B = 0.00042;
 	var NB = 0.00015; //TODO: this value will change next year at the latest
-	var thorDollarPrice = 2;
-	var isAuthorityNode = false;
-	var isMjolnirNode = false;
-	var isThunderNode = false;
-	var isStrengthNode = false;
+	var thorPrice = 2;
 
-	var calculateThor = function(vet, A, M, T, S) {
+	var calculateThor = function(vet, nodeType) {
+		var A = (nodeType == "thrudheim");
+		var M = (nodeType == "mjolnir");
+		var T = (nodeType == "thunder");
+		var S = (nodeType == "strength");
+
 		var bonus = (A || M) ? 2 : (T ? 1.5 : (S ? 1 : 0));
 		return (B + (NB * bonus)) * vet;
 	};
 
 	$(calculateButton).on("click", function() {
 		var vetAmount = $("#vetamount").val();
-		isAuthorityNode = $("#thrudheim").prop('checked');
-		isMjolnirNode = $("#mjolnir").prop('checked');
-		isThunderNode = $("#thunder").prop('checked');
-		isStrengthNode = $("#strength").prop('checked');
-		//thorDollarPrice = $("#thorDollarPrice").val() || thorDollarPrice;
+		var nodeType = $("#nodeSelector").val();
+		thorPrice = $("#thorPrice").val() || thorPrice;
 
 		if($.isNumeric(vetAmount)) {
-			var thorPerDay = calculateThor(vetAmount, isAuthorityNode, isMjolnirNode, isThunderNode, isStrengthNode);
-			var tpdDollars = (thorPerDay*thorDollarPrice).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
-			$("#thorRewardPerDay").html(
-				thorPerDay.toFixed(2) + " THOR per day"
+			var thorPerDay = calculateThor(vetAmount, nodeType);
+			var tpdDollars = (thorPerDay*thorPrice).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+			$("#thorPerDay").html(
+				thorPerDay.toFixed(2) + " THOR"
 			);
-			$("#incomePerDay2").html("$" + tpdDollars);
-			$("#incomePerDay5").html("$" + (thorPerDay*5).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,'));
-			$("#incomePerDay10").html("$" + (thorPerDay*10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,'));
-			$("#incomePerDay25").html("$" + (thorPerDay*25).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,'));
-
+			$("#incomePerDay").html("$" + tpdDollars);
+			
 			var thorPerYear = thorPerDay*365;
-			var tpyDollars = (thorPerYear*thorDollarPrice).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
-			$("#thorRewardPerYear").html(
-				thorPerYear.toFixed(2) + " THOR per year"
+			var tpyDollars = (thorPerYear*thorPrice).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+			$("#thorPerYear").html(
+				thorPerYear.toFixed(2) + " THOR"
 			);
-			$("#incomePerYear2").html("$" + tpyDollars);
-			$("#incomePerYear5").html("$" + (thorPerYear*5).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,'));
-			$("#incomePerYear10").html("$" + (thorPerYear*10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,'));
-			$("#incomePerYear25").html("$" + (thorPerYear*25).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,'));
+			$("#incomePerYear").html("$" + tpyDollars);
 
-			if (isAuthorityNode) {
+			if (nodeType === "thrudheim") {
 				$("#thorRewardPerYear").append("<p> PLUS 30% of all THOR Power consumed on the blockchain");
 			}
 

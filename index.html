@@ -45,79 +45,61 @@
       <div class="masthead-content">
         <div class="container">
           <h1>Vechain Thor Calculator</h1>
-          <h2>How many VET do you own?</h2>
-          <input type="number" step="any" min="0" id="vetamount" name="vetamount">
-          <form> 
-            <span>Do you have any matured nodes?</span>
-            <div>
-              <input type="radio" id="none"
-                     name="node" value="none" checked>
-              <label for="none">None</label>
-              <input type="radio" id="strength"
-                     name="node" value="strength">
-              <label for="strength">Strength</label>
-              <input type="radio" id="thunder"
-                     name="node" value="thunder">
-              <label for="thunder">Thunder</label>
-              <input type="radio" id="mjolnir"
-                     name="node" value="mjolnir">
-              <label for="mjolnir">Mjolnir</label>
-              <input type="radio" id="thrudheim"
-                     name="node" value="thrudheim">
-              <label for="thrudheim">Thrudheim</label>
+          <div class="row justify-content-md-center">
+            <div class="col-sm-4">
+              <h3>How many VET do you own?</h3>
+              <input type="number" step="any" min="0" class="form-control" id="vetamount" name="vetamount">
+            </div>
+          </div>
+          <form id="priceAndNodeForm"> 
+            <div class="row justify-content-center">
+              <div class="col-4">
+                <div class="row">
+                  <div class="col-sm-4">
+                    <span class="thorPrice">THOR Price ($)</span>
+                  </div>
+                  <div class="col-sm-4">
+                    <input type="number" step="any" min="1" id="thorPrice" class="form-control" value="2">
+                  </div>
+                </div>
+              </div>
+              <div class="col-4 input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="mr-sm-2" for="inlineFormCustomSelect">Matured Nodes:</label>
+                </div>
+                <select class="custom-select mr-sm-2" id="nodeSelector">
+                  <option selected>None</option>
+                  <option value="strength">Strength</option>
+                  <option value="thunder">Thunder</option>
+                  <option value="mjolnir">Mjolnir</option>
+                  <option value="thrudheim">Thrudheim</option>
+                </select>
+              </div>
             </div>
           </form>
           <input type="button" id="thorcalculate" class="btn btn-primary btn-calculate" value="calculate">
 
-          <div id="thorReward" class="thor-reward" style="display:none">
+          <div id="thorReward" class="thor-reward container" style="display:none">
             <span id="vetDisplay"></span>
             <span id="thorRewardPerDay"></span>
             <span id="thorRewardPerYear"></span>
 
             <div class="dollar-reward">
               <div class="row">
-                <div class="col">THOR price in USD</div>
-                <div class="col">Your income per day</div>
-                <div class="col">Your income per year</div>
+                <div class="col align-self-center">THOR GENERATED PER DAY</div>
+              </div>
+              <div class="row justify-content-center">
+                <div id="thorPerDay" class="col-4"></div>
+                <div id="incomePerDay" class="col-4"></div>
               </div>
               <div class="row">
-                <div class="col">$2</div>
-                <div class="col">
-                  <span id="incomePerDay2"></span>
-                </div>
-                <div class="col">
-                  <span id="incomePerYear2"></span>
-                </div>
+                <div class="col align-self-center">THOR GENERATED PER YEAR</div>
               </div>
-              <div class="row">
-                <div class="col">$5</div>
-                <div class="col">
-                  <span id="incomePerDay5"></span>
-                </div>
-                <div class="col">
-                  <span id="incomePerYear5"></span>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col">$10</div>
-                <div class="col">
-                  <span id="incomePerDay10"></span>
-                </div>
-                <div class="col">
-                  <span id="incomePerYear10"></span>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col">$25</div>
-                <div class="col">
-                  <span id="incomePerDay25"></span>
-                </div>
-                <div class="col">
-                  <span id="incomePerYear25"></span>
-                </div>
+              <div class="row justify-content-center">
+                <div id="thorPerYear" class="col-4"></div>
+                <div id="incomePerYear" class="col-4"></div>
               </div>
             </div>
-
           </div>
         </div>
       </div>
