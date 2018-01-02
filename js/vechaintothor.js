@@ -14,15 +14,12 @@
 	var B = 0.00042;
 	var NB = 0.00015; //TODO: this value will change next year at the latest
 	var thorPrice = 2;
-<<<<<<< HEAD
 		
 	var topVetBid = 0.00015; // update via API
 	var btcUsdt = 10000; // update via API
 
 	var vetUsdt = topVetBid / btcUsdt;
-=======
 	var vetAmount = 0;
->>>>>>> dcf188adbe6e01dd1a5826d68931743f35501615
 
 	var calculateThor = function(vet, nodeType) {
 		var A = (nodeType == "thrudheim");
@@ -34,37 +31,30 @@
 		return (B + (NB * bonus)) * vet;
 	};
 
-<<<<<<< HEAD
-	$(calculateButton).on("click", function() {
-		this.calculatePayouts();
-		
-		// TODO - these ticker queries should just be on a timer methinks
-		var vetTicker = new ticker("https://api.binance.com");
-		vetTicker.get("/api/v1/depth/?symbol=VETBTC", function(response) {
+	$(document).ready = function() {
+		var binanceTicker = new ticker("https://api.binance.com");
+		binanceTicker.get("/api/v1/depth/?symbol=VETBTC", function(response) {
 			var info = JSON.parse(response.body);			
 			if (info.bids.length > 0 && info.bids[0].length > 0) {
 				topVetBid = info.bids[0][0]; // see binance api
 				vetUsdt = topVetBid / btcUsdt;
 			}
-			vetUsdt = topVetBid / btcUsdt;
 		});
-=======
-	var inputChange = function(vet, thor) {
-		var vetAmount = vet || vetAmountInput.val();
-		var nodeType = nodeTypeSelector.val();
-		var thorPrice = thor || thorPriceInput.val();
->>>>>>> dcf188adbe6e01dd1a5826d68931743f35501615
-
-		var btcTicker = new ticker("https://api.binance.com");
-		btcTicker.get("/api/v1/depth/?symbol=BTCUSDT", function(response) {
+		
+		binanceTicker.get("/api/v1/depth/?symbol=BTCUSDT", function(response) {
 			var info = JSON.parse(response.body);			
 			if (info.bids.length > 0 && info.bids[0].length > 0) {
 				btcUsdt = info.bids[0][0]; // see binance api
 				vetUsdt = topVetBid / btcUsdt;
 			}
 		});
+	}
 
-	});
+	var inputChange = function(vet, thor) {
+		var vetAmount = vet || vetAmountInput.val();
+		var nodeType = nodeTypeSelector.val();
+		var thorPrice = thor || thorPriceInput.val();
+	};
 
 	var calculatePayouts = function() {		
 		if($.isNumeric(vetAmount)) {
@@ -90,18 +80,11 @@
 				thorRewardDisplay.show();
 			}
 		}
-<<<<<<< HEAD
-	}
-=======
 	};
 
 	$(calculateButton).on("click", calculateThor);
->>>>>>> dcf188adbe6e01dd1a5826d68931743f35501615
 
-	$("#vetamount").keyup(function(event) {
-    	// if (event.keyCode === 13) {
-     //    	$(calculateButton).click();
-    	// }
+	$("#vetamount").keyup(function(event) {    	
     	var currentVetAmount = vetAmountInput.val();
     	if (currentVetAmount != vetAmount) {
     		vetAmount = currentVetAmount;
@@ -131,8 +114,9 @@
 		}
 	});
 
-	// dummy file for ticker that can evolve into full api endpoint support in the future
-	var ticker = function(url) {
+	// dummy ticker that can evolve into full api endpoint support in the future
+	var ticker = function(apiBaseUrl) {
+		var apiUrl = apiBaseUrl;
     	this.get = function(url, callback) {
 			var httpReq = new XMLHttpRequest();
 			httpReq.onreadystatechange = function() {
@@ -140,7 +124,7 @@
 					callback(httpReq.responseText);
 				}
 			}
-			httpReq.open("GET", url, true);
+			httpReq.open("GET", apiUrl + url, true);
 			httpReq.send( null );
    	 	}
 	}
