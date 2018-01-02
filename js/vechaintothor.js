@@ -54,9 +54,7 @@
 		var vetAmount = vet || vetAmountInput.val();
 		var nodeType = nodeTypeSelector.val();
 		var thorPrice = thor || thorPriceInput.val();
-	};
-
-	var calculatePayouts = function() {		
+		
 		if($.isNumeric(vetAmount)) {
 			var thorPerDay = calculateThor(vetAmount, nodeType);
 			var tpdDollars = (thorPerDay*thorPrice).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
