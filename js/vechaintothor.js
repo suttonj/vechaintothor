@@ -1,14 +1,28 @@
 (function($) {	
 	
 	var calculateButton = $("#thorcalculate");
+	var vetAmountInput = $("#vetamount");
+	var thorPriceInput = $("#thorPrice");
+	var nodeTypeSelector = $("#nodeSelector");
+
+	var thorPerDayDisplay = $("#thorPerDay");
+	var incomePerDayDisplay = $("#incomePerDay");
+	var thorPerYearDisplay = $("#thorPerYear");
+	var incomePerYearDisplay = $("#incomePerYear");
+	var thorRewardDisplay = $("#thorReward");
+
 	var B = 0.00042;
 	var NB = 0.00015; //TODO: this value will change next year at the latest
 	var thorPrice = 2;
+<<<<<<< HEAD
 		
 	var topVetBid = 0.00015; // update via API
 	var btcUsdt = 10000; // update via API
 
 	var vetUsdt = topVetBid / btcUsdt;
+=======
+	var vetAmount = 0;
+>>>>>>> dcf188adbe6e01dd1a5826d68931743f35501615
 
 	var calculateThor = function(vet, nodeType) {
 		var A = (nodeType == "thrudheim");
@@ -20,6 +34,7 @@
 		return (B + (NB * bonus)) * vet;
 	};
 
+<<<<<<< HEAD
 	$(calculateButton).on("click", function() {
 		this.calculatePayouts();
 		
@@ -33,6 +48,12 @@
 			}
 			vetUsdt = topVetBid / btcUsdt;
 		});
+=======
+	var inputChange = function(vet, thor) {
+		var vetAmount = vet || vetAmountInput.val();
+		var nodeType = nodeTypeSelector.val();
+		var thorPrice = thor || thorPriceInput.val();
+>>>>>>> dcf188adbe6e01dd1a5826d68931743f35501615
 
 		var btcTicker = new ticker("https://api.binance.com");
 		btcTicker.get("/api/v1/depth/?symbol=BTCUSDT", function(response) {
@@ -49,29 +70,50 @@
 		if($.isNumeric(vetAmount)) {
 			var thorPerDay = calculateThor(vetAmount, nodeType);
 			var tpdDollars = (thorPerDay*thorPrice).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
-			$("#thorPerDay").html(
+			thorPerDayDisplay.html(
 				thorPerDay.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '1,') + " THOR"
 			);
-			$("#incomePerDay").html("$" + tpdDollars);
+			incomePerDayDisplay.html("$" + tpdDollars);
 			
 			var thorPerYear = thorPerDay*365;
 			var tpyDollars = (thorPerYear*thorPrice).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
-			$("#thorPerYear").html(
+			thorPerYearDisplay.html(
 				thorPerYear.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '1,') + " THOR"
 			);
-			$("#incomePerYear").html("$" + tpyDollars);
+			incomePerYearDisplay.html("$" + tpyDollars);
 
 			if (nodeType === "thrudheim") {
-				$("#thorRewardPerYear").append("<p> PLUS 30% of all THOR Power consumed on the blockchain");
+				$(".dollar-reward").append("<p> PLUS 30% of all THOR Power consumed on the blockchain");
 			}
 
-			$("#thorReward").show();
+			if (!thorRewardDisplay.is(':visible')) {
+				thorRewardDisplay.show();
+			}
 		}
+<<<<<<< HEAD
 	}
+=======
+	};
+
+	$(calculateButton).on("click", calculateThor);
+>>>>>>> dcf188adbe6e01dd1a5826d68931743f35501615
 
 	$("#vetamount").keyup(function(event) {
-    	if (event.keyCode === 13) {
-        	$(calculateButton).click();
+    	// if (event.keyCode === 13) {
+     //    	$(calculateButton).click();
+    	// }
+    	var currentVetAmount = vetAmountInput.val();
+    	if (currentVetAmount != vetAmount) {
+    		vetAmount = currentVetAmount;
+    		inputChange(vetAmount, thorPrice);
+    	}
+	});
+
+	$("#thorPrice").on('change keyup', function(event) {
+		var currentThorPrice = thorPriceInput.val();
+    	if (currentThorPrice != thorPrice) {
+    		thorPrice = currentThorPrice;
+    		inputChange(vetAmount, thorPrice);
     	}
 	});
 
