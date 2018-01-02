@@ -10,7 +10,17 @@
 
 
 .thor-reward {
+    width: 500px;
+    margin: 0 auto;
     margin-top: 25px;
+    .result-label {
+    	font-weight: 600;
+    	font-size: 14px;
+    }
+    .result-text {
+    	font-weight: 900;
+    	font-size: 24px;
+    }
 }
 #priceAndNodeForm {
     margin-top: 25px;
