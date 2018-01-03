@@ -162,8 +162,15 @@ header.masthead .thor-reward {
   box-shadow: 0 0 0 0.2rem rgba(50, 180, 242, 0.5);
 }
 
+header.masthead {
+  padding-top: 7rem;
+}
+
+.input-group label {
+  margin-top: .4rem;
+}
+
 .thor-reward {
-  width: 500px;
   margin: 0 auto;
   margin-top: 25px;
 }
@@ -180,4 +187,8 @@ header.masthead .thor-reward {
 
 #priceAndNodeForm {
   margin-top: 25px;
+}
+
+.custom-select {
+  width: 100%;
 }
