@@ -48,10 +48,10 @@
 		});
 	}
 
-	var inputChange = function(vet, thor) {
-		var vetAmount = vet || vetAmountInput.val();
+	var inputChange = function() {
+		var vetAmount = vetAmountInput.val();
 		var nodeType = nodeTypeSelector.val();
-		var thorPrice = thor || thorPriceInput.val();
+		var thorPrice = thorPriceInput.val();
 
 		if($.isNumeric(vetAmount)) {
 			var thorPerDay = calculateThor(vetAmount, nodeType);
@@ -69,7 +69,9 @@
 			incomePerYearDisplay.html("$" + tpyDollars);
 
 			if (nodeType === "thrudheim") {
-				$(".dollar-reward").append("<p> PLUS 30% of all THOR Power consumed on the blockchain");
+				$("#thrudheimBonus").show();
+			} else {
+				$("#thrudheimBonus").hide();
 			}
 
 			if (!thorRewardDisplay.is(':visible')) {
@@ -78,7 +80,7 @@
 		}
 	};
 
-	$(calculateButton).on("click", calculateThor);
+	//$(calculateButton).on("click", calculateThor); -- no need for a button tbh
 
 	$("#vetamount").keyup(function(event) {    	
     	var currentVetAmount = vetAmountInput.val();
@@ -97,8 +99,10 @@
 	});
 
 	$("#vetamount").on('change', function(event) {
-    	var vet = $(this).val();
-		if (vet >= 150000) {
+		var vet = $(this).val();
+		if (vet >= 250000) {
+			$("#nodeSelector").val('thrudheim');
+		} else if (vet >= 150000) {
 			$("#nodeSelector").val('mjolnir');
 		} else if (vet >= 50000) {
 			$("#nodeSelector").val('thunder');
@@ -108,6 +112,7 @@
 		else {
 			$("#nodeSelector").val('none');
 		}
+		inputChange(vetAmount, thorPrice);
 	});
 
 	// dummy ticker that can evolve into full api endpoint support in the future
