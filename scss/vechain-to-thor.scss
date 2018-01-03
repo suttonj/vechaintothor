@@ -8,9 +8,15 @@
 @import "masthead.scss";
 @import "bootstrap-overrides.scss";
 
+header.masthead{
+    padding-top: 7rem;
+}
+
+.input-group label{
+    margin-top: .4rem;
+}
 
 .thor-reward {
-    width: 500px;
     margin: 0 auto;
     margin-top: 25px;
     .result-label {
@@ -24,4 +30,8 @@
 }
 #priceAndNodeForm {
     margin-top: 25px;
+}
+
+.custom-select {
+    width: 100%;
 }

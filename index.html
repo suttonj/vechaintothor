@@ -41,75 +41,76 @@
       </div>
     </nav>
 
-    <header class="masthead text-center text-white">
+    <header class="masthead text-white">
       <div class="masthead-content">
         <div class="container">
-          <h1>Vechain Thor Calculator</h1>
-          <div class="row justify-content-md-center">
-            <div class="col-sm-4">
-              <h3>How many VET do you own?</h3>
+          <h2>Vechain Thor Calculator</h2>
+          <div class="row text-center justify-content-md-center">
+            <div class="col-md-6 col-lg-4 col-12">
+              <h4>How many VET do you own?</h4>
               <input type="number" step="any" min="0" class="form-control" id="vetamount" name="vetamount" placeholder="100">
             </div>
-            <div id="exchangePrices">
-                <div class="row justify-content-center result-text">
-                    <div class="col-sm-4"> VET/USDT Price ($) </div>
-                    <div id="vetUsdtPrice" class="col-4">2.25</div>
-                    <div class="col-sm-4"> VET/BTC Price ($) </div>
-                    <div id="vetBtcPrice" class="col-4">0.00018</div>
-                    <div class="col-sm-4"> BTC/USDT Price ($) </div>
-                    <div id="btcUsdtPrice" class="col-4">15000</div>
-                </div>              
+          </div>
+          <hr />
+          <div class="row">
+            <div class="col-md-3 col-lg-2 offset-md-3 offset-lg-4 col-6 text-left input-group">
+              <label class="thorPrice">THOR Price ($)</label>
+            </div>
+            <div class="col-md-3 col-lg-2 col-6">
+              <input type="number" step="any" min="1" id="thorPrice" class="form-control" value="2">
             </div>
           </div>
-          <form id="priceAndNodeForm"> 
-            <div class="row justify-content-center">
-              <div class="col-4">
-                <div class="row">
-                  <div class="col-sm-4">
-                    <span class="thorPrice">THOR Price ($)</span>
-                  </div>
-                  <div class="col-sm-4">
-                    <input type="number" step="any" min="1" id="thorPrice" class="form-control" value="2">
-                  </div>
-                </div>
-              </div>
-              <div class="col-4 input-group mb-3">
-                <div class="input-group-prepend">
-                  <label class="mr-sm-2" for="inlineFormCustomSelect">Matured Nodes:</label>
-                </div>
-                <select class="custom-select mr-sm-2" id="nodeSelector">
-                  <option value="none" selected>None</option>
-                  <option value="strength">Strength</option>
-                  <option value="thunder">Thunder</option>
-                  <option value="mjolnir">Mjolnir</option>
-                  <option value="thrudheim">Thrudheim</option>
-                </select>
-              </div>
+          <div class="row">
+            <div class="col-md-3 col-lg-2 offset-md-3 offset-lg-4 col-6 text-left input-group">
+              <label for="inlineFormCustomSelect">Matured Nodes:</label>
             </div>
+            <div class="col-md-3 col-lg-2 col-6">
+              <select class="custom-select" id="nodeSelector">
+                <option value="none" selected>None</option>
+                <option value="strength">Strength</option>
+                <option value="thunder">Thunder</option>
+                <option value="mjolnir">Mjolnir</option>
+                <option value="thrudheim">Thrudheim</option>
+              </select>
+            </div>
+          </div>
+          </div>
+          <form id="priceAndNodeForm"> 
           </form>
-          <input type="button" id="thorcalculate" class="btn btn-primary btn-calculate" value="calculate">
 
           <div id="thorReward" class="thor-reward container" style="display:none">
+            <hr />
             <span id="vetDisplay"></span>
             <span id="thorRewardPerDay"></span>
             <span id="thorRewardPerYear"></span>
 
             <div class="dollar-reward">
               <div class="row">
-                <div class="col align-self-center result-label">THOR GENERATED PER DAY</div>
+                <div class="col align-self-center result-label">EARNINGS PER DAY</div>
               </div>
               <div class="row justify-content-center result-text">
-                <div id="thorPerDay" class="col-4"></div>
-                <div id="incomePerDay" class="col-4"></div>
+                <div id="thorPerDay" class="col-md-6"></div>
               </div>
               <div class="row">
-                <div class="col align-self-center result-label">THOR GENERATED PER YEAR</div>
+                <div class="col align-self-center result-label">EARNINGS PER YEAR</div>
               </div>
               <div class="row justify-content-center result-text">
-                <div id="thorPerYear" class="col-4"></div>
-                <div id="incomePerYear" class="col-4"></div>
+                <div id="thorPerYear" class="col-md-6"></div>
               </div>
+              <p class="thrudheim-reward" style="display: none;"> PLUS 30% of all THOR Power consumed on the blockchain </p>
             </div>
+          </div>
+          <div id="exchangePrices" class="container">
+              <hr />
+              <div class="row result-text">
+                  <div class="col-md-4 offset-md-3 col-lg-3 offset-lg-4 col-6 text-left"> <b>VET/USDT Price ($)</b> </div>
+                  <div id="vetUsdtPrice" class="col-6 col-md-2 col-lg-1 text-right">2.25</div>
+                  <div class="col-md-4 offset-md-3 col-lg-3 offset-lg-4 col-6 text-left"> <b>VET/BTC Price ($)</b> </div>
+                  <div id="vetBtcPrice" class="col-6 col-md-2 col-lg-1 text-right">0.0018</div>
+                  <div class="col-md-4 offset-md-3 col-lg-3 offset-lg-4 col-6 text-left"> <b>BTC/USDT Price ($)</b> </div>
+                  <div id="btcUsdtPrice" class="col-6 col-md-2 col-lg-1 text-right">15000</div>
+                  <div class="text-center col-12"><small>Prices based on most recent values from Binance</small></div>
+              </div>              
           </div>
         </div>
       </div>

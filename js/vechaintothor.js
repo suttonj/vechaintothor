@@ -52,24 +52,25 @@
 		var vetAmount = vet || vetAmountInput.val();
 		var nodeType = nodeTypeSelector.val();
 		var thorPrice = thor || thorPriceInput.val();
+		console.log("calculating")
 
 		if($.isNumeric(vetAmount)) {
 			var thorPerDay = calculateThor(vetAmount, nodeType);
 			var tpdDollars = (thorPerDay*thorPrice).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
 			thorPerDayDisplay.html(
-				thorPerDay.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '1,') + " THOR"
+				thorPerDay.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '1,') + " THOR / $" + tpdDollars
 			);
-			incomePerDayDisplay.html("$" + tpdDollars);
 			
 			var thorPerYear = thorPerDay*365;
 			var tpyDollars = (thorPerYear*thorPrice).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
 			thorPerYearDisplay.html(
-				thorPerYear.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '1,') + " THOR"
+				thorPerYear.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '1,') + " THOR / $" + tpyDollars 
 			);
-			incomePerYearDisplay.html("$" + tpyDollars);
 
 			if (nodeType === "thrudheim") {
-				$(".dollar-reward").append("<p> PLUS 30% of all THOR Power consumed on the blockchain");
+				$(".thrudheim-reward").css("display", "block");
+			} else {
+				$(".thrudheim-reward").css("display", "none");
 			}
 
 			if (!thorRewardDisplay.is(':visible')) {
@@ -78,15 +79,7 @@
 		}
 	};
 
-	$(calculateButton).on("click", calculateThor);
-
-	$("#vetamount").keyup(function(event) {    	
-    	var currentVetAmount = vetAmountInput.val();
-    	if (currentVetAmount != vetAmount) {
-    		vetAmount = currentVetAmount;
-    		inputChange(vetAmount, thorPrice);
-    	}
-	});
+	$(calculateButton).on("click", inputChange(vetAmount, thorPrice));
 
 	$("#thorPrice").on('change keyup', function(event) {
 		var currentThorPrice = thorPriceInput.val();
@@ -96,9 +89,12 @@
     	}
 	});
 
-	$("#vetamount").on('change', function(event) {
-    	var vet = $(this).val();
-		if (vet >= 150000) {
+	$("#vetamount").on('change keyup', function(event) {
+
+		var vet = $(this).val();
+		if (vet >= 250000) {
+			$("#nodeSelector").val('thrudheim');
+		} else if (vet >= 150000) {
 			$("#nodeSelector").val('mjolnir');
 		} else if (vet >= 50000) {
 			$("#nodeSelector").val('thunder');
@@ -107,6 +103,11 @@
 		}
 		else {
 			$("#nodeSelector").val('none');
+		}
+
+		if (vet != vetAmount) {
+			vetAmount = vet;
+			inputChange(vetAmount, thorPrice);
 		}
 	});
 
