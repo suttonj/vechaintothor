@@ -3,7 +3,7 @@
  * Copyright 2017-2018 SharkCIA
  */
 body {
-  font-family: 'Lato';
+
 }
 
 h1,
@@ -12,7 +12,6 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Catamaran';
   font-weight: 800 !important;
 }
 
@@ -55,13 +54,13 @@ h6 {
 header.masthead {
   position: relative;
   overflow: hidden;
-  padding-top: calc(7rem + 72px);
+  /*padding-top: calc(7rem + 72px);
   padding-bottom: 7rem;
   background: linear-gradient(0deg, #32b4f2 0%, #9f80ce 100%);
   background-repeat: no-repeat;
   background-position: center center;
   background-attachment: scroll;
-  background-size: cover;
+  background-size: cover; */
 }
 
 header.masthead .masthead-content {
@@ -163,7 +162,7 @@ header.masthead .thor-reward {
 }
 
 header.masthead {
-  padding-top: 7rem;
+  padding-top: 2rem;
 }
 
 .input-group label {

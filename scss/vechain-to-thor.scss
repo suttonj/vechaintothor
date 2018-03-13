@@ -8,7 +8,7 @@
 @import "masthead.scss";
 @import "bootstrap-overrides.scss";
 
-header.masthead{
+header > .masthead {
     padding-top: 7rem;
 }
 

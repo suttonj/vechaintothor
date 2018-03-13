@@ -26,7 +26,26 @@
 		var S = (nodeType == "strength");
 
 		var bonus = (A || M) ? 2 : (T ? 1.5 : (S ? 1 : 0));
-		return (B + (NB * bonus)) * vet;
+		var xBonus = calculateXBonus(vet);
+		return (B + (NB * bonus) + (NB * xBonus)) * vet;
+	};
+
+	var calculateXBonus = function(vet) {
+		var bonus = 0;
+		if (vet >= 6000) {
+			bonus = .25;
+		}
+		if (vet >= 16000) {
+			bonus = 1;
+		}
+		if (vet >= 56000) {
+			bonus = 1.5;
+		}
+		if (vet >= 156000) {
+			bonus = 2;
+		}
+
+		return bonus;
 	};
 
 	$(document).ready = function() {		
@@ -52,19 +71,18 @@
 		var vetAmount = vet || vetAmountInput.val();
 		var nodeType = nodeTypeSelector.val();
 		var thorPrice = thor || thorPriceInput.val();
-		console.log("calculating")
 
 		if($.isNumeric(vetAmount)) {
 			var thorPerDay = calculateThor(vetAmount, nodeType);
 			var tpdDollars = (thorPerDay*thorPrice).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
 			thorPerDayDisplay.html(
-				thorPerDay.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '1,') + " THOR / $" + tpdDollars
+				thorPerDay.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + " THOR / $" + tpdDollars
 			);
 			
 			var thorPerYear = thorPerDay*365;
 			var tpyDollars = (thorPerYear*thorPrice).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
 			thorPerYearDisplay.html(
-				thorPerYear.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '1,') + " THOR / $" + tpyDollars 
+				thorPerYear.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + " THOR / $" + tpyDollars 
 			);
 
 			if (nodeType === "thrudheim") {
@@ -124,5 +142,5 @@
 			httpReq.send( null );
    	 	}
 	}
-}($));
+}(jQuery));
 
