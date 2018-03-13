@@ -48,24 +48,24 @@
 		return bonus;
 	};
 
-	$(document).ready = function() {		
-		var binanceTicker = new ticker("https://api.binance.com");
-		binanceTicker.get("/api/v1/depth/?symbol=VETBTC", function(response) {
-			var info = JSON.parse(response.body);			
-			if (info.bids.length > 0 && info.bids[0].length > 0) {
-				topVetBid = info.bids[0][0]; // see binance api
-				vetUsdt = topVetBid / btcUsdt;
-			}
-		});
+	$(document).ready(function() {		
+		$.get("https://api.binance.com/api/v1/depth?symbol=VENBTC",	
+			function(response) {
+				var info = JSON.parse(response.body);			
+				if (info.bids.length > 0 && info.bids[0].length > 0) {
+					topVetBid = info.bids[0][0]; // see binance api
+					vetUsdt = topVetBid / btcUsdt;
+				}
+			});
 		
-		binanceTicker.get("/api/v1/depth/?symbol=BTCUSDT", function(response) {
-			var info = JSON.parse(response.body);			
-			if (info.bids.length > 0 && info.bids[0].length > 0) {
-				btcUsdt = info.bids[0][0]; // see binance api
-				vetUsdt = topVetBid / btcUsdt;
-			}
-		});
-	}
+		// binanceTicker.get("https://api.binance.com/api/v1/depth/?symbol=BTCUSDT", function(response) {
+		// 	var info = JSON.parse(response.body);			
+		// 	if (info.bids.length > 0 && info.bids[0].length > 0) {
+		// 		btcUsdt = info.bids[0][0]; // see binance api
+		// 		vetUsdt = topVetBid / btcUsdt;
+		// 	}
+		// });
+	});
 
 	var inputChange = function(vet, thor) {
 		var vetAmount = vet || vetAmountInput.val();
@@ -142,5 +142,5 @@
 			httpReq.send( null );
    	 	}
 	}
-}(jQuery));
+}($));
 
